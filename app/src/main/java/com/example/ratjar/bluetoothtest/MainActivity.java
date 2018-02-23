@@ -3,6 +3,7 @@ package com.example.ratjar.bluetoothtest;
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +16,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.IOException;
 import java.util.Set;
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_ACCESS_COARSE_LOCATION = 10;
 
     BluetoothAdapter mBluetoothAdapter;
+    private BluetoothSocket mmSocket = null;
+
 
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -33,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 String deviceName = device.getName();
                 String deviceHardwareAddress = device.getAddress();
+                if(deviceName.contains("Nick")) {
+                    device.createBond();
+                }
             }
         }
     };
