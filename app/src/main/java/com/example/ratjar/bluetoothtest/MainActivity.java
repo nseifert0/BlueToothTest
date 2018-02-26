@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
                             btSocket = device.createInsecureRfcommSocketToServiceRecord(mUUID);
                             mBluetoothAdapter.cancelDiscovery();
                             btSocket.connect();
+                            send("Hello World");
                         }
                         catch(IOException e) {
                         }
@@ -56,6 +57,17 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
+
+    private void send(String message) {
+        if (btSocket!=null) {
+            try {
+                btSocket.getOutputStream().write(message.getBytes());
+            }
+            catch (IOException e) {
+            }
+        }
+    }
 
 
     @Override
