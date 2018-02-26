@@ -39,8 +39,10 @@ public class MainActivity extends AppCompatActivity {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 String deviceName = device.getName();
                 String deviceHardwareAddress = device.getAddress();
-                if(deviceName.contains("rasp")) {
-                    device.createBond();
+                if(deviceName != null) {
+                    if (deviceName.contains("rasp")) {
+                        device.createBond();
+                    }
                 }
             }
         }
