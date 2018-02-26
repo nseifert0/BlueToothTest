@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     static final UUID mUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     BluetoothAdapter mBluetoothAdapter;
-    private BluetoothSocket mmSocket = null;
+    BluetoothSocket btSocket = null;
 
 
 
@@ -42,6 +42,15 @@ public class MainActivity extends AppCompatActivity {
                 if(deviceName != null) {
                     if (deviceName.contains("rasp")) {
                         device.createBond();
+                        while(device.getBondState() != BluetoothDevice.BOND_BONDED)
+                        {}
+                        try {
+                            btSocket = device.createInsecureRfcommSocketToServiceRecord(mUUID);
+                            mBluetoothAdapter.cancelDiscovery();
+                            btSocket.connect();
+                        }
+                        catch(IOException e) {
+                        }
                     }
                 }
             }
