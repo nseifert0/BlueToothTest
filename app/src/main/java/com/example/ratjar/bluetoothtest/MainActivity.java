@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_ENABLE_BT = 10;
     private static final int REQUEST_ACCESS_COARSE_LOCATION = 10;
+    static final UUID mUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     BluetoothAdapter mBluetoothAdapter;
     private BluetoothSocket mmSocket = null;
